@@ -1,13 +1,12 @@
 def LetterConvert(PN,CN,NL,CW,WL):
-    Words = [WL]
-    num=PN[CN]
-    for numw in NL:
-        if numw[0] == int(num):
-            for let in numw[1]:
-                if CN != len(PN)-1:
-                    for wrd in LetterConvert(PN, CN+1, NL, CW + let, []):
-                        WL.append(wrd)
-                elif CN == len(PN)-1:
-                    WL.append(CW+let)
-                    return WL
-    return Words
+    for num in PN[CN:]:
+        for numw in NL:
+            if numw[0] == int(num):
+                for let in numw[1]:
+                    if CN != len(PN) - 1:
+                        WL.append(CW+let)
+                        for wrd in LetterConvert(PN, CN + 1, NL, CW + let, []):
+                            WL.append(wrd)
+                    elif CN == len(PN) - 1:
+                        WL.append(CW + let)
+        return WL
