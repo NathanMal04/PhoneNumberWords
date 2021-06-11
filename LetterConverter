@@ -1,5 +1,6 @@
 def LetterConvert(PN,CN,NL,CW,WL):
     for num in PN[CN:]:
+        print(num)
         for numw in NL:
             if numw[0] == int(num):
                 for let in numw[1]:
@@ -9,4 +10,6 @@ def LetterConvert(PN,CN,NL,CW,WL):
                             WL.append(wrd)
                     elif CN == len(PN) - 1:
                         WL.append(CW + let)
-        return WL
+        if CN != 0:
+            return WL
+        CN+=1
