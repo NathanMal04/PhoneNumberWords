@@ -1,12 +1,14 @@
-def LetterConvert(PN,CN,NL,CW,WL):
-    for num in PN[CN:]:
-        for numw in NL:
-            if numw[0] == int(num):
-                for let in numw[1]:
-                    if CN != len(PN) - 1:
-                        WL.append(CW+let)
-                        for wrd in LetterConvert(PN, CN + 1, NL, CW + let, []):
-                            WL.append(wrd)
-                    elif CN == len(PN) - 1:
-                        WL.append(CW + let)
-        return WL
+def LetterConvert(phone_number, current_number, current_word, word_number_dict):
+    for num in phone_number[current_number:]:
+        num_letters_ind = number_letters[int(num)]
+        for letter in num_letters_ind:
+            if current_number != len(phone_number) - 1:
+                word_number_dict[current_word + letter]=current_number - len(current_word)
+                for word in LetterConvert(phone_number, current_number + 1, current_word + letter, {}):
+                    word_number_dict[word]=0
+            elif current_number == len(phone_number) - 1:
+                word_number_dict[current_word + letter] = current_number - len(current_word)
+        if current_number != 0:
+            return word_number_dict
+        current_number += 1
+    return word_number_dict
